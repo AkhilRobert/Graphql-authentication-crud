@@ -9,4 +9,5 @@ declare module 'express-session' {
 export type MyContext = {
   req: Request;
   res: Response;
+  userId?: number;
 };

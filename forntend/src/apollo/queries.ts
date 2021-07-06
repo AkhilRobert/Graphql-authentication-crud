@@ -26,3 +26,32 @@ export const LOGOUT = gql`
     logout
   }
 `;
+
+export const TODOS = gql`
+  query Todos {
+    todos {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const DELETE = gql`
+  mutation Delete($id: Float!) {
+    deleteTodo(id: $id)
+  }
+`;
+
+export const ADD_TODO = gql`
+  mutation NewTodo($title: String!) {
+    newTodo(data: { title: $title })
+  }
+`;
+
+export const UPDATE_TODO = gql`
+  mutation UpdateTodo($id: Float!, $title: String!) {
+    updateTodo(data: { id: $id, title: $title })
+  }
+`;

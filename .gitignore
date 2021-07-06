@@ -27,3 +27,7 @@ node_modules
 build/
 tmp/
 temp/
+
+*/**.sqlite
+*/**.sqlite-shm
+*/**.sqlite-wal

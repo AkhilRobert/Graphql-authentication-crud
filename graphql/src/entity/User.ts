@@ -1,7 +1,15 @@
+import argon2 from 'argon2';
 import { IsEmail, MaxLength, MinLength } from 'class-validator';
 import { Field, ID, InputType, ObjectType } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, BeforeInsert } from 'typeorm';
-import argon2 from 'argon2';
+import {
+  BaseEntity,
+  BeforeInsert,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn
+} from 'typeorm';
+import { Todo } from './Todo';
 
 @Entity()
 @ObjectType()
@@ -21,8 +29,12 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
+  @Field(() => [Todo])
+  @OneToMany(() => Todo, (todo) => todo.user)
+  todos: Todo[];
+
   @BeforeInsert()
-  private async _hashPassword() {
+  private async _() {
     this.password = await argon2.hash(this.password);
   }
 

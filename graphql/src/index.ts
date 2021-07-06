@@ -8,6 +8,7 @@ import { TypeormStore } from 'typeorm-store';
 import { UserResolver } from './resolvers/userResolver';
 import { Session } from './entity/Session';
 import { MyContext } from './types/MyContext';
+import { TodoResolver } from './resolvers/TodoReslover';
 
 async function startServer() {
   const app = express();
@@ -32,7 +33,7 @@ async function startServer() {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver]
+      resolvers: [UserResolver, TodoResolver]
     }),
     context: ({ req, res }): MyContext => {
       return { req, res };
